@@ -28,6 +28,8 @@ RUN apt-get update \
     #
     # Install eslint globally
     && npm install -g eslint \
+    # Install http-server globally
+    && npm install -g http-server \
     #
     # Clean up
     && apt-get autoremove -y \
