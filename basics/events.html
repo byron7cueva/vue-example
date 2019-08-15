@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Filters</title>
+    </head>
+    <body>
+        <div id="app">
+            <p>Count value is {{ count }}</p>
+            <p>
+                <button v-on:click="add">Add 1</button>
+                <!-- Other form to name attribute for events -->
+                <button @click="substract">Substract 1</button>
+            </p>
+            <p>
+                <!-- Directly add implementation expresion javascript in the attribute -->
+                <button v-on:click="count++">Add 1</button>
+                <button @click="count--">Substract 1</button>
+            </p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    count: 0
+                },
+                methods: {
+                    // Bind data on scope function, because reference data whit this
+                    add: function() {
+                        this.count++
+                    },
+                    substract: function() {
+                        this.count--
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
