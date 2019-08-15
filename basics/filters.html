@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Filters</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{ title | uppercase }}</h1>
+            <h2>{{ subtitle | lowercase }}</h2>
+            <h3>{{ subtitle | lowercase | uppercase }}</h3>
+            <p>{{'text capitalize' |  capitalize }}</p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    title: 'This is title',
+                    subtitle: 'This is subtitle'
+                },
+                filters: {
+                    uppercase: (str) => {
+                        return str.toUpperCase()
+                    },
+                    lowercase: (str) => {
+                        return str.toLowerCase()
+                    },
+                    capitalize: (str) => {
+                        return `${str[0].toUpperCase()}${str.substring(1, str.length)}`
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
