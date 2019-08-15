@@ -19,13 +19,13 @@
                     subtitle: 'This is subtitle'
                 },
                 filters: {
-                    uppercase: (str) => {
+                    uppercase: function(str) {
                         return str.toUpperCase()
                     },
-                    lowercase: (str) => {
+                    lowercase: function(str) {
                         return str.toLowerCase()
                     },
-                    capitalize: (str) => {
+                    capitalize: function(str) {
                         return `${str[0].toUpperCase()}${str.substring(1, str.length)}`
                     }
                 }
