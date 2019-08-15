@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Conditionals</title>
+    </head>
+    <body>
+        <div id="app">
+            <!-- v-if Need render and change DOM -->
+            <p v-if="visible">Message render</p>
+            <template v-if="visibleBlock">
+                <h1>Title</h1>
+                <h2>Sub title</h2>
+            </template>
+
+            <!-- v-show Only need change display value css property -->
+            <p v-show="show">Message 1 show when show value is {{show}}</p>
+            <p v-show="!show">Message 2 show when show value is {{show}}</p>
+        </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+            <script>
+                let app = new Vue({
+                    el: '#app',
+                    data: {
+                        visible: true,
+                        show: false,
+                        visibleBlock: true
+                    }
+                })
+            </script>
+    </body>
+</html>
