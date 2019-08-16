@@ -2,29 +2,53 @@
 #app
   img(src='./assets/logo.png')
   h1 ByMusic
+  select(v-model="selectedCountry")
+    option(v-for="country in countries" v-bind:value="country.value") {{ country.name }}
+  spinner(v-show="loading")
   ul
-    li(v-for="artist in artists") {{ artist.name }}
+    artist(v-for="artist in artists" v-bind:artist="artist" v-bind:key="artist.mbid")
 </template>
 
 <script>
 import api from './api';
+import Artist from './components/Artist';
+import Spinner from './components/Spinner';
 
 export default {
   name: 'app',
+  components: {
+    Artist,
+    Spinner
+  },
   data () {
     return {
-      artists: [
-        {name: 'A'},
-        {name: 'D'},
-        {name: 'C'},
-        {name: 'D'}
-      ]
+      artists: [],
+      countries: [
+        {name: 'Ecuador', value: 'ecuador'},
+        {name: 'España', value: 'spain'},
+        {name: 'Colombia', value: 'colombia'},
+        {name: 'Argentina', value: 'argentina'}
+      ],
+      selectedCountry: 'ecuador',
+      loading: false
     }
   },
-  mounted: function() {
-    api().then(artists => {
-      this.artists = artists;
+  mounted() {
+    this.refreshArtist();
+  },
+  methods: {
+    refreshArtist() {
+      this.loading = true
+      api(this.selectedCountry).then(artists => {
+        this.loading = false;
+        this.artists = artists;
     })
+    }
+  },
+  watch: {
+    selectedCountry()  {
+      this.refreshArtist();
+    }
   }
 }
 </script>
