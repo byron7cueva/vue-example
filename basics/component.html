@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Filters</title>
+    </head>
+    <body>
+        <div id="app">
+           <form v-on:submit.prevent="onSubmit">
+                <h2>Selecciones los cursos</h2>
+                <template v-for="curso in cursos">
+                    <!--
+                        :curso Se para datos debe estar bindiado
+                        @select Se pasa el evento que despues se va emitir desde el componente
+                    -->
+                    <curso :curso="curso" @select="onCursoSelect"></curso>
+                </template>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script>
+            //NOTA: El componente debe estar definido primero antes que la app
+            //Definiendo un componente
+            //Primer parametro nombre del tag
+            //Segundo parametro cuerpo de la logica del componente
+            Vue.component('curso', {
+                //Propiedades que le vamos a poder pasar al componente
+                props: ['curso'],
+                //HTML del componente
+                //Este debe tener un solo elemento html raiz
+                //No se puede utilizar la etiqueta template
+                template: `
+                    <div>
+                        <input type="checkbox" :id="curso.value" :value="curso.value" @change="onChange"/>
+                        <label :for="curso.value">{{ curso.name }}</label>
+                    </div>
+                `,
+                methods: {
+                    //Un componente puede resivir datos desde el padre
+                    //Pero el hijo no puede alterar datos que contiene el padre
+                    //Por lo cual se debe emitirle un evento cuando se dese mandar datos
+                    onChange: function(event) {
+                        //Emitiendo el evento del del componente
+                        //Primer parametro es el nombre del evento que se va disparar
+                        //Los parametros restantes es los que va ha resivir el listener que se aplique
+                        this.$emit('select', this.curso.value, event.target.checked)
+                    }
+                }
+            })
+
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    cursos: [
+                        {value: 'node', name: 'Curos de node.js'},
+                        {value: 'rust', name: 'Curos de Rust'},
+                        {value: 'python', name: 'Curos de Python'},
+                        {value: 'kotlin', name: 'Curos de Kotlin'}
+                    ],
+                    cursosSeleccionados: []
+                },
+                methods: {
+                    onSubmit: function() {
+                        console.log("Se ejecuta el metodo submit")
+                        console.log(this.cursosSeleccionados)
+                    },
+                    onCursoSelect: function(nombreCurso, isSelected) {
+                        //Si el curso esta seleccionado se agrega, caso contrario se le quita de la lista
+                        if(isSelected)
+                            this.cursosSeleccionados.push(nombreCurso)
+                        else {
+                            let index = this.cursosSeleccionados.indexOf(nombreCurso)
+                            this.cursosSeleccionados.splice(index, 1)
+                        }
+                    }
+                }
+            })
+
+        </script>
+    </body>
+</html>

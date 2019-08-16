@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Filters</title>
+    </head>
+    <body>
+        <div id="app">
+           <input type="text" v-model="name" placeholder="Ingrese el nombre"/>
+           <p>El nombre en mayusculas es: {{ name | uppercase }}</p>
+
+           <form v-on:submit.prevent="onSubmit">
+                <h2>Selecciones los cursos</h2>
+                <input type="checkbox" v-model="cursos" id="node" value="node"/>
+                <label for="node">Curso de Node.js</label>
+                <input type="checkbox" v-model="cursos" id="python" value="python"/>
+                <label for="python">Curso de Python</label>
+                <input type="checkbox" v-model="cursos" id="rust" value="rust"/>
+                <label for="node">Curso de Rust</label>
+                <input type="checkbox" v-model="cursos" id="kotlin" value="kotlin"/>
+                <label for="node">Curso de Kotil</label>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    name: '',
+                    cursos: []
+                },
+                filters: {
+                    uppercase: function(str) {
+                        return str.toUpperCase()
+                    }
+                },
+                methods: {
+                    onSubmit: function() {
+                        console.log("Se ejecuta el metodo submit")
+                        console.log(this.cursos)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

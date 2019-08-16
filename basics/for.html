@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Filters</title>
+    </head>
+    <body>
+        <div id="app">
+           <form v-on:submit.prevent="onSubmit">
+                <h2>Selecciones los cursos</h2>
+                <template v-for="curso in cursos">
+                        <input type="checkbox" v-model="cursosSeleccionados" v-bind:id="curso.value" :value="curso.value"/>
+                        <label :for="curso.value">{{ curso.name }}</label>
+                </template>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    cursos: [
+                        {value: 'node', name: 'Curos de node.js'},
+                        {value: 'rust', name: 'Curos de Rust'},
+                        {value: 'python', name: 'Curos de Python'},
+                        {value: 'kotlin', name: 'Curos de Kotlin'}
+                    ],
+                    cursosSeleccionados: []
+                },
+                methods: {
+                    onSubmit: function() {
+                        console.log("Se ejecuta el metodo submit")
+                        console.log(this.cursosSeleccionados)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

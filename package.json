@@ -1,0 +1,23 @@
+{
+  "name": "vue-example",
+  "version": "1.0.0",
+  "description": "Examples of vue.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byron7cueva/vue-example.git"
+  },
+  "keywords": [
+    "vue",
+    "examples"
+  ],
+  "author": "byron7cueva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byron7cueva/vue-example/issues"
+  },
+  "homepage": "https://github.com/byron7cueva/vue-example#readme"
+}
